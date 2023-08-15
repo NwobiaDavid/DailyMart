@@ -1,8 +1,24 @@
 import cors from 'cors';
-import express, { Request, Response } from 'express'; 
-import { sampleProducts } from './data';
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+import { productRouter } from './routers/productRouter';
 
+dotenv.config();
 const app = express();
+
+const MONGODB_URI = process.env.MONGO_URI || 'mongodb:/localhost/ecom'
+
+mongoose.set('strictQuery', true);
+
+mongoose.connect(MONGODB_URI)
+.then(()=>{
+    console.log('connected to mongodb');
+})
+.catch(()=>{
+    console.log('error occurred during connection');
+})
+
 app.use(
     cors({
         credentials: true,
@@ -11,13 +27,7 @@ app.use(
 )
 const PORT = 3000 || process.env.PORT;
 
-app.get('/api/products', (req: Request, res:Response)=>{
-    res.json(sampleProducts);
-})
-
-app.get('/api/products/:slug', (req: Request, res: Response) =>{
-    res.json(sampleProducts.find((x)=> x.slug === req.params.slug))
-})
+app.use('/api/products', productRouter);
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}...`)
