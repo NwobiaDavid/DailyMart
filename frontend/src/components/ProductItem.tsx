@@ -6,6 +6,7 @@ import Rating from './Rating';
 import { Store } from "../Store";
 import { convertProductToCartItem } from "../utils";
 import { CartItem } from "../types/Cart";
+import { toast } from "react-toastify";
 
 function ProductItem({ product }: { product: Product }) {
   const {state, dispatch} = useContext(Store)
@@ -21,10 +22,16 @@ function ProductItem({ product }: { product: Product }) {
       // toast.warn('Sorry. Product is out of stock')
       return
     }
+    // ctxDispatch({
+    //   type: 'CART_ADD_ITEM',
+    //   payload: { ...item, quantity },
+    // })
+    
     dispatch({
       type: 'CART_ADD_ITEM',
       payload: {...item, quantity}
     })
+    toast.success('Product added to the cart')
   }
 
   return (

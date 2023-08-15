@@ -1,7 +1,10 @@
 import { Link, Outlet } from 'react-router-dom';
 import { Store } from './Store';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 import { useContext, useEffect } from 'react';
 import { Badge, Button } from 'react-bootstrap';
+import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
   const {
@@ -19,8 +22,11 @@ function App() {
 
   return (
     <div>
+      <ToastContainer position='bottom-center' limit={3} />
       <header className="flex px-3 bg-slate-950 text-white justify-between py-[1rem] items-center">
-        <div>DAILY MART </div>
+        <LinkContainer to="/">
+          <div className='cursor-pointer'>DAILY MART </div>
+        </LinkContainer>
         <div className="flex items-center">
           <Link to="/cart" className="nav-link">
             Cart
