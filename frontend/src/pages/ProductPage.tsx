@@ -9,12 +9,12 @@ import { ApiError } from '../types/ApiError';
 import Rating from '../components/Rating';
 
 export default function ProductPage() {
-  const params = useParams();
+  const params = useParams<{ slug: string }>();
   const { slug } = params;
   const {
     data: product,
     isLoading,
-    error,
+    error
   } = useGetProductDetailsBySlugQuery(slug!);
 
   return isLoading ? (
@@ -24,8 +24,8 @@ export default function ProductPage() {
   ) : !product ? (
     <MessageBox variant="danger">product not found</MessageBox>
   ) : (
-    <div>
-      <Row>
+        <div>
+        <Row>
         <Col md={6}>
           <img className="max-w-full" src={product.image} alt={product.name}></img>
         </Col>
