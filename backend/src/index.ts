@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { productRouter } from './routers/productRouter';
 import { seedRouter } from './routers/seedRouter';
 import { userRouter } from './routers/userRouter';
+import { orderRouter } from './routers/orderRouter';
 
 dotenv.config();
 const app = express();
@@ -36,6 +37,7 @@ const PORT = 3000 || process.env.PORT;
 app.use('/api/products', productRouter);
 app.use('/api/seed', seedRouter);
 app.use('/api/users', userRouter);
+app.use('/api/orders', orderRouter);
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}...`)
