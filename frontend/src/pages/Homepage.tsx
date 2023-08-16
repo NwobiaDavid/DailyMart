@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { useGetProductsQuery } from '../hooks/ProductHooks';
 import { getError } from '../utils';
 import { ApiError } from '../types/ApiError';
-import loadingBox from '../components/loadingBox';
+import loadingBox from '../components/LoadingBox';
 
 
 export default function Homepage() {

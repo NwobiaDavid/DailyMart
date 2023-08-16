@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetProductDetailsBySlugQuery } from '../hooks/ProductHooks';
 import MessageBox from '../components/MessageBox';
-import LoadingBox from '../components/loadingBox';
+import LoadingBox from '../components/LoadingBox';
 import { convertProductToCartItem, getError } from '../utils';
 import { ApiError } from '../types/ApiError';
 import Rating from '../components/Rating';
