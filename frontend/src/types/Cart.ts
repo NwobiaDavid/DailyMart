@@ -24,3 +24,12 @@ export type CartItem = {
     shippingAddress: ShippingAddress
     paymentMethod: string
   }
+
+  export type ShippingAddress = {
+    fullName: string
+    address: string
+    city: string
+    country: string
+    postalCode: string
+    location: Location
+  }

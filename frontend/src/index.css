@@ -5,3 +5,13 @@
 .rating span{
     color: gold;
 }
+
+.checkout-steps>div{
+    border-bottom: 0.2rem solid lightgray;
+    color: lightgray;
+}
+
+.checkout-steps > div.active {
+    border-bottom: 0.2rem solid orange;
+    color: orange;
+}
