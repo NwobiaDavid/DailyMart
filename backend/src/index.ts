@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { productRouter } from './routers/productRouter';
 import { seedRouter } from './routers/seedRouter';
+import { userRouter } from './routers/userRouter';
 
 dotenv.config();
 const app = express();
@@ -26,10 +27,15 @@ app.use(
         origin: ['http://localhost:5173']
     })
 )
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 const PORT = 3000 || process.env.PORT;
 
 app.use('/api/products', productRouter);
 app.use('/api/seed', seedRouter);
+app.use('/api/users', userRouter);
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}...`)
