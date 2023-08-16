@@ -3,12 +3,12 @@ import { Store } from './Store';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import { useContext, useEffect } from 'react';
-import { Badge, Button } from 'react-bootstrap';
+import { Badge, Button, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
   const {
-    state: { mode, cart },
+    state: { mode, cart , userInfo},
     dispatch,
   } = useContext(Store);
 
@@ -19,6 +19,15 @@ function App() {
   const switchModeHandler = () => {
     dispatch({ type: 'SWITCH_MODE' });
   };
+
+  const signoutHandler = () => {
+    dispatch({ type: 'USER_SIGNOUT' })
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('cartItems')
+    localStorage.removeItem('shippingAddress')
+    localStorage.removeItem('paymentMethod')
+    window.location.href = '/signin'
+  }
 
   return (
     <div>
@@ -36,9 +45,21 @@ function App() {
               </Badge>
             )}
           </Link>
-          <a href="/signin" className="ml-2 nav-link">
-            signin
-          </a>
+          {userInfo ? (
+              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                <Link
+                  className="dropdown-item"
+                  to="#signout"
+                  onClick={signoutHandler}
+                >
+                  Sign Out
+                </Link>
+              </NavDropdown>
+            ) : (
+              <Link className="nav-link" to="/signin">
+                Sign In
+              </Link>
+            )}
           <Button variant={mode} onClick={switchModeHandler}>
             <i
               className={
