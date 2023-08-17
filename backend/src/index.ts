@@ -18,7 +18,7 @@ mongoose.set('strictQuery', true);
 
 mongoose.connect(MONGODB_URI)
 .then(()=>{
-    console.log('connected to mongodb');
+    console.log('connected to mongodb 💥');
 })
 .catch(()=>{
     console.log('error occurred during connection');
@@ -27,7 +27,7 @@ mongoose.connect(MONGODB_URI)
 app.use(
     cors({
         credentials: true,
-        origin: ['http://localhost:5173']
+        origin: true
     })
 )
 
