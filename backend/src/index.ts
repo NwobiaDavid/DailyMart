@@ -1,7 +1,8 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import path from 'path';
 import { productRouter } from './routers/productRouter';
 import { seedRouter } from './routers/seedRouter';
 import { userRouter } from './routers/userRouter';
@@ -40,6 +41,12 @@ app.use('/api/seed', seedRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/keys', keyRouter);
+
+//production path
+app.use(express.static(path.join(__dirname, '../../frontend/dist')))
+app.get('*', (req:Request, res:Response)=>
+res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'))
+)
 
 app.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}...`)

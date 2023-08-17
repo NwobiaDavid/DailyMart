@@ -5,14 +5,14 @@ import { Helmet } from "react-helmet-async";
 import { useGetProductsQuery } from '../hooks/ProductHooks';
 import { getError } from '../utils';
 import { ApiError } from '../types/ApiError';
-import loadingBox from '../components/LoadingBox';
+import LoadingBox from '../components/LoadingBox';
 
 
 export default function Homepage() {
 
     const {data: products, isLoading, error} = useGetProductsQuery()
   return isLoading ? (
-    <loadingBox />
+    <LoadingBox />
   ) : error ? (
     <MessageBox variant="danger">{getError(error as ApiError)}</MessageBox>
   ) : (
