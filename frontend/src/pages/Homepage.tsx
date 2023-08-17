@@ -2,10 +2,10 @@ import { Row, Col } from 'react-bootstrap';
 import MessageBox from '../components/MessageBox';
 import ProductItem from '../components/ProductItem';
 import { Helmet } from "react-helmet-async";
-import { useGetProductsQuery } from '../hooks/ProductHooks';
 import { getError } from '../utils';
 import { ApiError } from '../types/ApiError';
 import LoadingBox from '../components/LoadingBox';
+import {useGetProductsQuery} from '../hooks/ProductHooks'
 
 
 export default function Homepage() {

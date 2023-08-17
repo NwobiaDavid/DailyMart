@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import React from 'react';
 import { Cart, CartItem, ShippingAddress } from './types/Cart';
 import { UserInfo } from './types/UserInfo';
