@@ -1,14 +1,14 @@
 import { Link, Outlet } from 'react-router-dom';
 import { Store } from './Store';
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useContext, useEffect } from 'react';
 import { Badge, Button, NavDropdown } from 'react-bootstrap';
-import { LinkContainer } from "react-router-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap';
 
 function App() {
   const {
-    state: { mode, cart , userInfo},
+    state: { mode, cart, userInfo },
     dispatch,
   } = useContext(Store);
 
@@ -21,20 +21,20 @@ function App() {
   };
 
   const signoutHandler = () => {
-    dispatch({ type: 'USER_SIGNOUT' })
-    localStorage.removeItem('userInfo')
-    localStorage.removeItem('cartItems')
-    localStorage.removeItem('shippingAddress')
-    localStorage.removeItem('paymentMethod')
-    window.location.href = '/signin'
-  }
+    dispatch({ type: 'USER_SIGNOUT' });
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
+    window.location.href = '/signin';
+  };
 
   return (
     <div>
-      <ToastContainer position='bottom-center' limit={3} />
+      <ToastContainer position="bottom-center" limit={3} />
       <header className="flex px-3 bg-slate-950 text-white justify-between py-[1rem] items-center">
         <LinkContainer to="/">
-          <div className='cursor-pointer'>DAILY MART </div>
+          <div className="cursor-pointer">DAILY MART </div>
         </LinkContainer>
         <div className="flex items-center">
           <Link to="/cart" className="nav-link">
@@ -46,20 +46,23 @@ function App() {
             )}
           </Link>
           {userInfo ? (
-              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                <Link
-                  className="dropdown-item"
-                  to="#signout"
-                  onClick={signoutHandler}
-                >
-                  Sign Out
-                </Link>
-              </NavDropdown>
-            ) : (
-              <Link className="nav-link" to="/signin">
-                Sign In
+            <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+              <LinkContainer to="/orderhistory">
+                <NavDropdown.Item>Order History</NavDropdown.Item>
+              </LinkContainer>
+              <Link
+                className="dropdown-item"
+                to="#signout"
+                onClick={signoutHandler}
+              >
+                Sign Out
               </Link>
-            )}
+            </NavDropdown>
+          ) : (
+            <Link className="nav-link" to="/signin">
+              Sign In
+            </Link>
+          )}
           <Button variant={mode} onClick={switchModeHandler}>
             <i
               className={

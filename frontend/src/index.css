@@ -15,3 +15,8 @@
     border-bottom: 0.2rem solid orange;
     color: orange;
 }
+
+[data-bs-popper]{
+    left: auto;
+    right: 0;
+}
