@@ -7,6 +7,7 @@ import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import { Button, Container, Form } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
+import React from "react";
 
 export default function SignupPage() {
 

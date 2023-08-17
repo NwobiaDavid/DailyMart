@@ -4,6 +4,7 @@ import CheckoutSteps from "../components/CheckoutSteps"
 import { Helmet } from "react-helmet-async"
 import { Button, Form } from "react-bootstrap"
 import { Store } from "../Store"
+import React from "react"
 
 export default function PaymentMethodPage() {
     const navigate = useNavigate()

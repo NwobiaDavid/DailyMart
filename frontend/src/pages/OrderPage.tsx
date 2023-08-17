@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useContext , useEffect} from 'react'
+import React, { useContext , useEffect} from 'react'
 import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap'
 import { Helmet } from 'react-helmet-async'
 import { Link, useParams } from 'react-router-dom'
@@ -11,6 +11,7 @@ import { ApiError } from '../types/ApiError'
 import { getError } from '../utils'
 import { toast } from "react-toastify";
 import { PayPalButtons, PayPalButtonsComponentProps, SCRIPT_LOADING_STATE, usePayPalScriptReducer } from '@paypal/react-paypal-js'
+
 
 export default function OrderPage() {
   const { state } = useContext(Store)
@@ -85,7 +86,7 @@ export default function OrderPage() {
   }
 
   return isLoading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingBox />
   ) : error ? (
     <MessageBox variant="danger">{getError(error as ApiError)}</MessageBox>
   ) : !order ? (
@@ -208,7 +209,7 @@ export default function OrderPage() {
                         <Button onClick={testPayHandler}>Test Pay</Button>
                       </div>
                     )}
-                    {LoadingPay && <LoadingBox></LoadingBox>}
+                    {LoadingPay && <LoadingBox />}
                   </ListGroup.Item>
                 )}
               </ListGroup>

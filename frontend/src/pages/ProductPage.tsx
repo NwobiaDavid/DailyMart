@@ -10,6 +10,7 @@ import { ApiError } from '../types/ApiError';
 import Rating from '../components/Rating';
 import { Store } from '../Store';
 import { toast } from "react-toastify";
+import React from "react";
 
 export default function ProductPage() {
   const params = useParams<{ slug: string }>();

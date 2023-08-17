@@ -8,24 +8,24 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import App from './App.tsx';
+import App from './App';
 import './index.css';
-import Homepage from './pages/Homepage.tsx';
-import ProductPage from './pages/ProductPage.tsx';
+import Homepage from './pages/Homepage';
+import ProductPage from './pages/ProductPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { StoreProvider } from './Store.tsx';
-import CartPage from './pages/CartPage.tsx';
-import SigninPage from './pages/SigninPage.tsx';
-import SignupPage from './pages/SignupPage.tsx';
-import ShippingAddressPage from './pages/ShippingAddressPage.tsx';
-import PaymentMethodPage from './pages/PaymentMethodPage.tsx';
-import ProtectedRoute from './components/ProtectedRoute.tsx';
-import PlaceOrderPage from './pages/PlaceOrderPage.tsx';
-import OrderPage from './pages/OrderPage.tsx';
+import { StoreProvider } from './Store';
+import CartPage from './pages/CartPage';
+import SigninPage from './pages/SigninPage';
+import SignupPage from './pages/SignupPage';
+import ShippingAddressPage from './pages/ShippingAddressPage';
+import PaymentMethodPage from './pages/PaymentMethodPage';
+import ProtectedRoute from './components/ProtectedRoute';
+import PlaceOrderPage from './pages/PlaceOrderPage';
+import OrderPage from './pages/OrderPage';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import OrderHistoryPage from './pages/OrderHistoryPage.tsx';
-import ProfilePage from './pages/ProfilePage.tsx';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import ProfilePage from './pages/ProfilePage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

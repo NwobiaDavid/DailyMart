@@ -7,6 +7,7 @@ import { Store } from "../Store";
 import { convertProductToCartItem } from "../utils";
 import { CartItem } from "../types/Cart";
 import { toast } from "react-toastify";
+import React from "react";
 
 function ProductItem({ product }: { product: Product }) {
   const {state, dispatch} = useContext(Store)

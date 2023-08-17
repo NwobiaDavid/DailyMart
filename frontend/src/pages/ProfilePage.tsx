@@ -7,6 +7,7 @@ import { useUpdateProfileMutation } from '../hooks/userHooks'
 import { Store } from '../Store'
 import { ApiError } from '../types/ApiError'
 import { getError } from '../utils'
+import React from 'react'
 
 export default function ProfilePage() {
   const { state, dispatch } = useContext(Store)
@@ -80,7 +81,7 @@ export default function ProfilePage() {
           <Button disabled={isLoading} type="submit">
             Update
           </Button>
-          {isLoading && <LoadingBox></LoadingBox>}
+          {isLoading && <LoadingBox />}
         </div>
       </form>
     </div>

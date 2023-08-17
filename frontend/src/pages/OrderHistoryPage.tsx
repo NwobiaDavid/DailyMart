@@ -6,6 +6,7 @@ import { getError } from "../utils"
 import { ApiError } from "../types/ApiError"
 import LoadingBox from "../components/LoadingBox"
 import { Button } from "react-bootstrap"
+import React from "react"
 
 export default function OrderHistoryPage() {
     const navigate = useNavigate()
@@ -20,7 +21,7 @@ export default function OrderHistoryPage() {
 
         <h1>Order History</h1>
         {isLoading ? (
-          <LoadingBox></LoadingBox>
+          <LoadingBox />
         ) : error ? (
           <MessageBox variant="danger">{getError(error as ApiError)}</MessageBox>
         ) : (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable no-case-declarations */
 import React from 'react';
 import { Cart, CartItem, ShippingAddress } from './types/Cart';
