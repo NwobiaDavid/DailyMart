@@ -1,4 +1,5 @@
-// import Swiper core and required modules
+import '../index.css'
+
 import one from '../assets/carousel/elaine-casap-qgHGDbbSNm8-unsplash.jpg';
 import two from '../assets/carousel/megan-thomas-xMh_ww8HN_Q-unsplash.jpg';
 import three from '../assets/carousel/syd-wachs-epqNIYI6S7E-unsplash.jpg';
@@ -21,8 +22,8 @@ import 'swiper/css/autoplay';
 
 export default function Heropage() {
   return (
-    <div className="">
-      <Swiper
+    <div className=" ">
+      <Swiper className=''
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
@@ -35,17 +36,17 @@ export default function Heropage() {
         onSlideChange={() => console.log('slide change')}
       >
         <SwiperSlide>
-          <div style={{backgroundImage: `url(${one});  objectFit: cover;`}} className="object-cover h-[35rem] font-semibold flex justify-center items-center bg-red-200">
+          <div style={{backgroundImage: `url(${one})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-center items-center bg-red-200">
             {/* <h1>Slide 1</h1> */}
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div style={{backgroundImage: `url(${two})`}} className="object-cover h-[35rem] font-semibold flex justify-center items-center bg-blue-200">
+          <div style={{backgroundImage: `url(${two})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-center items-center bg-blue-200">
             {/* <h1>Slide 2</h1> */}
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div style={{backgroundImage: `url(${three})`}} className="object-cover h-[35rem] font-semibold flex justify-center items-center bg-lime-200">
+          <div style={{backgroundImage: `url(${three})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-center items-center bg-lime-200">
             {/* <h1>Slide 3</h1> */}
           </div>
         </SwiperSlide>

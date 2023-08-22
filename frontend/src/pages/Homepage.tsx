@@ -24,7 +24,7 @@ export default function Homepage() {
         <Helmet>
             <title>daily mart</title>
         </Helmet>
-        <div className='mb-5'>
+        <div className='mb-5 '>
         <Carousel />
         </div>
       {products!.map((products) => (
