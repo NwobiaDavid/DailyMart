@@ -4,17 +4,18 @@ import React from 'react';
 import { Cart, CartItem, ShippingAddress } from './types/Cart';
 import { UserInfo } from './types/UserInfo';
 
+// Define the AppState type
 type AppState = {
   mode: string;
   cart: Cart;
-  userInfo?: UserInfo;
+  userInfo?: UserInfo | null; // Use 'null' instead of 'undefined'
 };
 
+// Initialize the initial state with a conditional check for localStorage
 const initialState: AppState = {
   userInfo: localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo')!)
     : null,
-
   mode: localStorage.getItem('mode')
     ? localStorage.getItem('mode')!
     : window.matchMedia &&
@@ -38,6 +39,7 @@ const initialState: AppState = {
   },
 };
 
+// Define the Action type
 type Action =
   | { type: 'SWITCH_MODE' }
   | { type: 'CART_ADD_ITEM'; payload: CartItem }
@@ -48,11 +50,13 @@ type Action =
   | { type: 'SAVE_SHIPPING_ADDRESS'; payload: ShippingAddress }
   | { type: 'SAVE_PAYMENT_METHOD'; payload: string };
 
+// Define the reducer function
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case 'SWITCH_MODE':
-      localStorage.setItem('mode', state.mode === 'dark' ? 'light' : 'dark')
-      return { ...state, mode: state.mode === 'dark' ? 'light' : 'dark' };
+      const newMode = state.mode === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('mode', newMode);
+      return { ...state, mode: newMode };
 
     case 'CART_ADD_ITEM':
       const newItem = action.payload;
@@ -68,21 +72,24 @@ function reducer(state: AppState, action: Action): AppState {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
 
-    case 'CART_REMOVE_ITEM': {
-      const cartItems = state.cart.cartItems.filter(
+    case 'CART_REMOVE_ITEM':
+      const updatedCartItems = state.cart.cartItems.filter(
         (item: CartItem) => item._id !== action.payload._id
       );
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-      return { ...state, cart: { ...state.cart, cartItems } };
-    }
+      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+      return { ...state, cart: { ...state.cart, cartItems: updatedCartItems } };
 
     case 'CART_CLEAR':
-      return { ...state, cart: { ...state.cart, cartItems: [] } }
+      localStorage.removeItem('cartItems');
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
 
     case 'USER_SIGNIN':
+      localStorage.setItem('userInfo', JSON.stringify(action.payload));
       return { ...state, userInfo: action.payload };
 
     case 'USER_SIGNOUT':
+      localStorage.removeItem('userInfo');
+      localStorage.removeItem('cartItems'); // Remove cart items on signout
       return {
         mode:
           window.matchMedia &&
@@ -104,8 +111,11 @@ function reducer(state: AppState, action: Action): AppState {
           taxPrice: 0,
           totalPrice: 0,
         },
+        userInfo: null, // Set userInfo to null on signout
       };
+
     case 'SAVE_SHIPPING_ADDRESS':
+      localStorage.setItem('shippingAddress', JSON.stringify(action.payload));
       return {
         ...state,
         cart: {
@@ -113,7 +123,9 @@ function reducer(state: AppState, action: Action): AppState {
           shippingAddress: action.payload,
         },
       };
+
     case 'SAVE_PAYMENT_METHOD':
+      localStorage.setItem('paymentMethod', action.payload);
       return {
         ...state,
         cart: { ...state.cart, paymentMethod: action.payload },
@@ -124,13 +136,19 @@ function reducer(state: AppState, action: Action): AppState {
   }
 }
 
+// Define the default dispatch
 const defaultDispatch: React.Dispatch<Action> = () => initialState;
 
-const Store = React.createContext({
+// Create a context for the store
+const Store = React.createContext<{
+  state: AppState;
+  dispatch: React.Dispatch<Action>;
+}>({
   state: initialState,
   dispatch: defaultDispatch,
 });
 
+// Create a provider for the store
 function StoreProvider(props: React.PropsWithChildren<{}>) {
   const [state, dispatch] = React.useReducer<React.Reducer<AppState, Action>>(
     reducer,

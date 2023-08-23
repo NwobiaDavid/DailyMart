@@ -16,7 +16,7 @@ export default function Categories() {
         <h2 className="text-4xl font-bold">Categories</h2>
       </div>
 
-      <div className="grid gap-5  grid-cols-3 grid-rows-2">
+      <div className="grid gap-5  lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
         <Link
           to={'/fruits'}
           className="h-[300px] hover:scale-105 duration-200 hover:rounded-2xl flex items-end text- justify-center"
@@ -124,7 +124,7 @@ export default function Categories() {
           //   backgroundRepeat: 'no-repeat',
           // }}
         >
-          <p className="text-2xl font-bold bg-gray-500 rounded-lg flex justify-center items-center w-[80%] h-[80%] text-white px-3 py-2 mb-2 ">
+          <p className="text-2xl font-bold bg-gray-500 rounded-lg flex justify-center items-center w-[30%] h-[30%] text-white px-3 py-2 mb-2 ">
             Others
           </p>
         </Link>
