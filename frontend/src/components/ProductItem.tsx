@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext } from "react";
 import { Product } from '../types/Product';
 import { Card, Button } from 'react-bootstrap';
@@ -7,13 +8,14 @@ import { Store } from "../Store";
 import { convertProductToCartItem } from "../utils";
 import { CartItem } from "../types/Cart";
 import { toast } from "react-toastify";
-import React from "react";
 
 function ProductItem({ product }: { product: Product }) {
   const {state, dispatch} = useContext(Store)
   const {
     cart: {cartItems},
   } = state;
+
+
 
   const addToCartHandler = async (item: CartItem) => {
     const existItem = cartItems.find((x) => x._id === product._id);

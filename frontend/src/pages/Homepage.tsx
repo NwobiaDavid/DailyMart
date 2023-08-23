@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox';
 import {useGetProductsQuery} from '../hooks/ProductHooks'
 
 import Carousel from '../components/Carousel';
+import Categories from '../components/Categories';
 
 
 export default function Homepage() {
@@ -26,6 +27,9 @@ export default function Homepage() {
         </Helmet>
         <div className='mb-5 '>
         <Carousel />
+        </div>
+        <div>
+          <Categories />
         </div>
       {products!.map((products) => (
         <Col key={products.slug} sm={6} md={4} lg={3}>

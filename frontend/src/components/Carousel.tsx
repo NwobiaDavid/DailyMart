@@ -36,18 +36,18 @@ export default function Heropage() {
         onSlideChange={() => console.log('slide change')}
       >
         <SwiperSlide>
-          <div style={{backgroundImage: `url(${one})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-center items-center bg-red-200">
-            {/* <h1>Slide 1</h1> */}
+          <div style={{backgroundImage: `url(${one})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-end items-end p-3 bg-red-200">
+            <h1 className='text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-6xl w-[65%] text-right '>Farm to Fork, Delivered to Your Doorstep: Discover the Freshest Produce Online!</h1>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div style={{backgroundImage: `url(${two})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-center items-center bg-blue-200">
-            {/* <h1>Slide 2</h1> */}
+          <div style={{backgroundImage: `url(${two})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-end items-end p-3 bg-blue-200">
+          <h1 className='text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-6xl w-[65%] text-right '>Your Culinary Adventure Starts Here: Explore Our Garden of Freshness Online.</h1>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div style={{backgroundImage: `url(${three})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-center items-center bg-lime-200">
-            {/* <h1>Slide 3</h1> */}
+          <div style={{backgroundImage: `url(${three})`, backgroundSize: 'cover',  backgroundRepeat: 'no-repeat' }} className="rounded-2xl h-[35rem] font-semibold flex justify-end items-end p-3 bg-lime-200">
+          <h1 className='text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-6xl w-[65%] text-right '>From Harvest to Your Home: Taste the Difference of Freshness, Order Online Today!</h1>
           </div>
         </SwiperSlide>
       </Swiper>
