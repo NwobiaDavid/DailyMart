@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express'
 import { isAuth } from '../utils'
 import asyncHandler from 'express-async-handler'
 import { OrderModel } from '../models/orderModel'
-import { Product } from '../models/ProductModel'
+import { Product } from '../models/productModel'
 
 export const orderRouter = express.Router()
 

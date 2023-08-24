@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import { Product } from './models/ProductModel';
+import { Product } from './models/productModel';
 import { User } from "./models/userModel";
 
 
