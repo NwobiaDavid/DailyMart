@@ -1,5 +1,5 @@
 import { modelOptions, prop, getModelForClass, Ref } from '@typegoose/typegoose'
-import { Product } from './productModel'
+import { Product } from './ProductModel'
 import { User } from './userModel'
 
 class ShippingAddress {
