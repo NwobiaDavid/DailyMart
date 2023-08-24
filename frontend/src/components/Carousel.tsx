@@ -9,6 +9,7 @@ import {
   Scrollbar,
   A11y,
   Autoplay,
+  Parallax,
 } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,15 +20,17 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
+import 'swiper/css/parallax';
 
 export default function Heropage() {
   return (
     <div className=" ">
       <Swiper className=''
         // install Swiper modules
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay, Parallax]}
         spaceBetween={50}
         slidesPerView={1}
+        parallax
         // navigation
         autoplay={{ delay: 4000 }}
         pagination={{ clickable: true }}

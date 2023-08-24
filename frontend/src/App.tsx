@@ -38,23 +38,23 @@ function App() {
       <ToastContainer position="bottom-center" limit={1} />
       <header>
         <Navbar
-          className="d-flex flex-column align-items-stretch p-2 pb-0 mb-3"
+          className="d-flex flex-column  align-items-stretch  pb-0 mb-3"
           bg="dark"
           variant="dark"
           expand="lg"
         >
-          <div className="d-flex justify-content-between  align-items-center">
+          <div className="d-flex  justify-content-between  align-items-center">
             <LinkContainer to="/" className="header-link lg:mr-32 lg:ml-3 px-2 py-1">
               <Navbar.Brand>Daily Mart</Navbar.Brand>
             </LinkContainer>
             <SearchBox />
             <Navbar.Collapse role="navigation">
-              <Nav className="w-100 justify-content-end">
+              <Nav className="w-100 mr-3 mb-0 pb-0 mt-0 justify-content-end">
                 <Link to="#" className="nav-link header-link" onClick={switchModeHandler}>
                   <i className={mode === 'light' ? 'fa fa-sun' : 'fa fa-moon'}></i> {mode === 'light' ? 'Light' : 'Dark'}
                 </Link>
                 {userInfo ? (
-                  <NavDropdown className="header-link" title={`Hello, ${userInfo.name}`}>
+                  <NavDropdown className="header-link mb-0 pb-0 " title={`Hello, ${userInfo.name}`}>
                     <LinkContainer to="/profile">
                       <NavDropdown.Item>User Profile</NavDropdown.Item>
                     </LinkContainer>
@@ -62,12 +62,12 @@ function App() {
                       <NavDropdown.Item>Order History</NavDropdown.Item>
                     </LinkContainer>
                     <NavDropdown.Divider />
-                    <Link className="dropdown-item" to="#signout" onClick={signoutHandler}>
+                    <Link className="dropdown-item " to="#signout" onClick={signoutHandler}>
                       Sign Out
                     </Link>
                   </NavDropdown>
                 ) : (
-                  <NavDropdown className="header-link" title={`Hello, sign in`}>
+                  <NavDropdown className="header-link mb-0 pb-0" title={`Hello, sign in`}>
                     <LinkContainer to="/signin">
                       <NavDropdown.Item>Sign In</NavDropdown.Item>
                     </LinkContainer>
@@ -76,7 +76,7 @@ function App() {
                 <Link to="/orderhistory" className="nav-link header-link">
                   Orders
                 </Link>
-                <Link to="/cart" className="nav-link flex items-center justify-center header-link p-0">
+                <Link to="/cart" className="nav-link py-1 px-2 flex items-center justify-center header-link p-0">
                   <div>
                     <span className="cart-badge">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
@@ -90,8 +90,10 @@ function App() {
               </Nav>
             </Navbar.Collapse>
           </div>
-          <div className="sub-header">
-            <div className="d-flex">
+
+
+          <div className="sub-header ">
+            <div className="d-flex  ">
               <Link to="#" className="nav-link header-link p-1" onClick={() => setSidebarIsOpen(!sidebarIsOpen)}>
                 <i className="fas fa-bars"></i> All
               </Link>
@@ -102,6 +104,7 @@ function App() {
               ))}
             </div>
           </div>
+
         </Navbar>
       </header>
 
@@ -117,7 +120,7 @@ function App() {
         }
       >
         <ListGroup variant="flush">
-          <ListGroup.Item action className="side-navbar-user">
+          <ListGroup.Item action className="side-navbar-user ">
             <LinkContainer
               to={userInfo ? `/profile` : `/signin`}
               onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
@@ -127,6 +130,7 @@ function App() {
               </span>
             </LinkContainer>
           </ListGroup.Item>
+
           <ListGroup.Item>
             <div className="d-flex justify-content-between align-items-center">
               <strong>Categories</strong>

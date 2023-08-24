@@ -9,6 +9,7 @@ import {useGetProductsQuery} from '../hooks/ProductHooks'
 
 import Carousel from '../components/Carousel';
 import Categories from '../components/Categories';
+import TodaysDeal from '../components/TodaysDeal';
 
 
 export default function Homepage() {
@@ -30,6 +31,9 @@ export default function Homepage() {
         </div>
         <div>
           <Categories />
+        </div>
+        <div>
+          <TodaysDeal />
         </div>
       {products!.map((products) => (
         <Col key={products.slug} sm={6} md={4} lg={3}>
