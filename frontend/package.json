@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^8.1.3",
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
     "@types/swiper": "^6.0.0",

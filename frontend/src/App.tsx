@@ -78,7 +78,7 @@ function App() {
                 </Link>
                 <Link to="/cart" className="nav-link py-1 px-2 flex items-center justify-center header-link p-0">
                   <div>
-                    <span className="cart-badge">
+                    <span className="text-green-400 cart-badge">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                     </span>
                     <svg fill="#ffffff" viewBox="130 150 200 300" width="40px" height="40px">
@@ -97,7 +97,7 @@ function App() {
               <Link to="#" className="nav-link header-link p-1" onClick={() => setSidebarIsOpen(!sidebarIsOpen)}>
                 <i className="fas fa-bars"></i> All
               </Link>
-              {['Todays Deal', 'Gifts', 'On Sale'].map((x) => (
+              {['Todays Deal', 'Packages', 'Recipes', 'Subscriptions'].map((x) => (
                 <Link key={x} className="nav-link header-link p-1 px-3" to={`/search?tag=${x}`}>
                   {x}
                 </Link>

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 /* @import 'swiper/swiper.min.css';
 @import 'swiper/components/navigation/navigation.min.css';
 @import 'swiper/components/pagination/pagination.min.css'; */
@@ -25,11 +28,11 @@
     right: 0;
 }
 
-.btn-primary,
+/* .btn-primary,
 .btn-outline-primary{
     background-color: gold;
     color: black;
-}
+} */
 
 /* header */
 
@@ -67,7 +70,7 @@
   
   .cart-badge {
     position: absolute;
-    color: #f08000;
+    
     font-weight: bold;
     margin-left: 16px;
     margin-top: -3px;

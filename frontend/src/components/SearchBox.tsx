@@ -19,12 +19,12 @@ export default function SearchBox() {
           id="q"
           className='rounded-full '
           value={query}
-          placeholder="Search Amazona"
-          aria-label="Search Amazona"
+          placeholder="Search Daily mart..."
+          aria-label="Search Daily mart..."
           aria-describedby="button-search"
           onChange={(e) => setQuery(e.target.value)}
         ></FormControl>
-        <Button variant="outline-primary" className='py-[10px] px-3 rounded-e-full' type="submit" id="button-search">
+        <Button  className='py-[10px] bg-green-500 border-green-500 hover:bg-green-600 hover:border-green-600 px-3 rounded-e-full' type="submit" id="button-search">
           <i className="fas fa-search"></i>
         </Button>
       </InputGroup>
