@@ -8,6 +8,7 @@ import { Store } from "../Store";
 import { convertProductToCartItem } from "../utils";
 import { CartItem } from "../types/Cart";
 import { toast } from "react-toastify";
+import { TbCurrencyNaira } from "react-icons/tb";
 
 function ProductItem({ product }: { product: Product }) {
   const {state, dispatch} = useContext(Store)
@@ -38,7 +39,7 @@ function ProductItem({ product }: { product: Product }) {
   }
 
   return (
-    <Card>
+    <Card className="hover:shadow-lg duration-200 shadow-black">
       <Link to={`/product/${product.slug}`}>
         <img src={product.image} className="card-img-top" alt={product.name} />
       </Link>
@@ -47,13 +48,15 @@ function ProductItem({ product }: { product: Product }) {
           <Card.Title>{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>${product.price}</Card.Text>
+        <Card.Text> <div className="flex mb-2 items-center">
+          <TbCurrencyNaira size={23} /> {product.price}
+        </div></Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
             Out of stock
           </Button>
         ) : (
-          <Button onClick={()=> addToCartHandler(convertProductToCartItem(product))} className='bg-blue-500'>Add to cart</Button>
+          <Button onClick={()=> addToCartHandler(convertProductToCartItem(product))} className='bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700'>Add to cart</Button>
         )}
       </Card.Body>
     </Card>
