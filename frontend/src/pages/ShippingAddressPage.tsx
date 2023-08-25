@@ -53,14 +53,14 @@ export default function ShippingAddressPage() {
   }
 
   return (
-    <div>
+    <div className='h-[80vh]'>
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
       <CheckoutSteps step1 step2></CheckoutSteps>
-      <div className="container small-container">
-        <h1 className="my-3">Shipping Address</h1>
-        <Form onSubmit={submitHandler}>
+      <div className="container small-container flex justify-center items-center flex-col ">
+        <h1 className="my-3 text-2xl">Shipping Address</h1>
+        <Form className='lg:w-[50%] ' onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Full Name</Form.Label>
             <Form.Control
@@ -101,8 +101,9 @@ export default function ShippingAddressPage() {
               required
             />
           </Form.Group>
+
           <div className="mb-3">
-            <Button variant="primary" type="submit">
+            <Button variant="primary" className='bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-500' type="submit">
               Continue
             </Button>
           </div>

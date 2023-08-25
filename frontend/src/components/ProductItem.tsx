@@ -8,7 +8,7 @@ import { Store } from "../Store";
 import { convertProductToCartItem } from "../utils";
 import { CartItem } from "../types/Cart";
 import { toast } from "react-toastify";
-import { TbCurrencyNaira } from "react-icons/tb";
+import { FaNairaSign } from "react-icons/fa6";
 
 function ProductItem({ product }: { product: Product }) {
   const {state, dispatch} = useContext(Store)
@@ -48,8 +48,8 @@ function ProductItem({ product }: { product: Product }) {
           <Card.Title>{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text> <div className="flex mb-2 items-center">
-          <TbCurrencyNaira size={23} /> {product.price}
+        <Card.Text> <div className="flex mb-2 text-lg items-center">
+          <FaNairaSign size={18} /> {product.price}
         </div></Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>

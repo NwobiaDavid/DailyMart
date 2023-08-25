@@ -11,6 +11,7 @@ import { ApiError } from '../types/ApiError'
 import { getError } from '../utils'
 import { toast } from "react-toastify";
 import { PayPalButtons, PayPalButtonsComponentProps, SCRIPT_LOADING_STATE, usePayPalScriptReducer } from '@paypal/react-paypal-js'
+import { FaNairaSign } from "react-icons/fa6";
 
 
 export default function OrderPage() {
@@ -147,12 +148,12 @@ export default function OrderPage() {
                           alt={item.name}
                           className="img-fluid rounded thumbnail"
                         ></img>{' '}
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                        <Link to={`/product/${item.slug}`} className='text-xl hover:text-green-700 duration-200'>{item.name}</Link>
                       </Col>
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={3}><span className='flex items-center text-lg'>< FaNairaSign />{item.price}</span></Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -168,19 +169,19 @@ export default function OrderPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
+                    <Col><span className='flex items-center'>< FaNairaSign />{order.itemsPrice.toFixed(2)}</span></Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>${order.shippingPrice.toFixed(2)}</Col>
+                    <Col><span className='flex items-center'>< FaNairaSign />{order.shippingPrice.toFixed(2)}</span></Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>${order.taxPrice.toFixed(2)}</Col>
+                    <Col><span className='flex items-center'>< FaNairaSign />{order.taxPrice.toFixed(2)}</span></Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -189,7 +190,7 @@ export default function OrderPage() {
                       <strong> Order Total</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                      <strong><span className='flex items-center'>< FaNairaSign />{order.totalPrice.toFixed(2)} </span></strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -206,7 +207,7 @@ export default function OrderPage() {
                         <PayPalButtons
                           {...paypalbuttonTransactionProps}
                         ></PayPalButtons>
-                        <Button onClick={testPayHandler}>Test Pay</Button>
+                        <Button className='bg-green-500 duration-200 border-green-500 hover:bg-green-700 hover:border-green-700' onClick={testPayHandler}>Test Pay</Button>
                       </div>
                     )}
                     {LoadingPay && <LoadingBox />}

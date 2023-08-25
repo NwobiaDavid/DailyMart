@@ -1,13 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
 
+.ibm-font{
+  font-family: 'IBM Plex Mono', monospace;
+}
 
-/* @import 'swiper/swiper.min.css';
-@import 'swiper/components/navigation/navigation.min.css';
-@import 'swiper/components/pagination/pagination.min.css'; */
+.poppins-font{
+  font-family: 'Poppins', sans-serif;
+}
+
 
 .rating span{
     color: gold;

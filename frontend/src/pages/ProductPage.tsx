@@ -10,7 +10,7 @@ import { ApiError } from '../types/ApiError';
 import Rating from '../components/Rating';
 import { Store } from '../Store';
 import { toast } from "react-toastify";
-import React from "react";
+import { FaNairaSign } from "react-icons/fa6";
 
 export default function ProductPage() {
   const params = useParams<{ slug: string }>();
@@ -48,46 +48,49 @@ const addToCartHandler = () =>{
   ) : !product ? (
     <MessageBox variant="danger">product not found</MessageBox>
   ) : (
-        <div>
-        <Row>
-        <Col md={6}>
-          <img className="max-w-full" src={product.image} alt={product.name}></img>
+        <div className="h-[80vh] poppins-font">
+        <Row className="h-full justify-center">
+        <Col md={6} className="lg:flex justify-center items-center">
+          <img className="lg:h-[70%] w-fit h-fit lg:w-[70%]  " src={product.image} alt={product.name}></img>
         </Col>
-        <Col md={3}>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <Helmet>
-                <title>{product.name}</title>
-              </Helmet>
-              <h1>{product.name}</h1>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Rating
-                rating={product.rating}
-                numReviews={product.numReviews}
-              ></Rating>
-            </ListGroup.Item>
-            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
-            <ListGroup.Item>
-              Description:
-              <p>{product.description}</p>
-            </ListGroup.Item>
-          </ListGroup>
+        <Col md={3} className=" pt-[10%]">
+         
+            <ListGroup className="md:h-[80%]" variant="flush">
+              <ListGroup.Item>
+                <Helmet>
+                  <title>{product.name}</title>
+                </Helmet>
+                <h1 className="text-4xl">{product.name}</h1>
+              </ListGroup.Item>
+              <ListGroup.Item  >
+                <Rating
+                  rating={product.rating}
+                  numReviews={product.numReviews}
+                ></Rating>
+              </ListGroup.Item>
+              <ListGroup.Item className="text-xl flex">Price : <span className="flex items-center"> <FaNairaSign /> {product.price}
+              </span></ListGroup.Item>
+              <ListGroup.Item className="text-xl">
+                Description:
+                <p>{product.description}</p>
+              </ListGroup.Item>
+            </ListGroup>
+        
         </Col>
 
-        <Col md={3}>
-          <Card>
+        <Col md={3} className="lg:pt-[10%]">
+          <Card  >
             <Card.Body>
-              <ListGroup variant="flush">
+              <ListGroup  variant="flush">
 
                 <ListGroup.Item>
                   <Row>
                     <Col>Price:</Col>
-                    <Col>${product.price}</Col>
+                    <Col><span className="flex items-center"> <FaNairaSign /> {product.price} </span> </Col>
                   </Row>
                 </ListGroup.Item>
 
-                <ListGroup.Item>
+                <ListGroup.Item >
                   <Row>
                     <Col>Status:</Col>
                     <Col>
@@ -103,7 +106,7 @@ const addToCartHandler = () =>{
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className="d-grid">
-                      <Button onClick={addToCartHandler} variant="primary" className='bg-blue-500'>Add to Cart</Button>
+                      <Button onClick={addToCartHandler} variant="primary" className='bg-green-500 border-green-500 hover:bg-green-700 hover:border-green-70000'>Add to Cart</Button>
                     </div>
                   </ListGroup.Item>
                 )}

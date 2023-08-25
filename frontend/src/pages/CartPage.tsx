@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
 import MessageBox from '../components/MessageBox';
+import { FaNairaSign } from "react-icons/fa6";
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -38,11 +39,11 @@ export default function CartPage() {
   }
 
   return (
-    <div>
+    <div className='h-[80vh]'>
       <Helmet>
         <title>Shopping cart</title>
       </Helmet>
-      <h1>Shopping cart</h1>
+      <h1 className='text-2xl'>Shopping cart</h1>
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
@@ -73,7 +74,7 @@ export default function CartPage() {
                       >
                         <i className="fas fa-minus-circle"></i>
                       </Button>{' '}
-                      <span>{item.quantity}</span>
+                      <span className='px-2'>{item.quantity}</span>
                       <Button
                         variant={mode}
                         onClick={() =>
@@ -85,7 +86,7 @@ export default function CartPage() {
                       </Button>
                     </Col>
 
-                    <Col md={3}>${item.price}</Col>
+                    <Col md={3}><span className='flex items-center'>< FaNairaSign />{item.price}</span></Col>
 
                     <Col md={2}>
                       <Button onClick={()=> removeItemHandler(item)} variant={mode}>
@@ -106,8 +107,10 @@ export default function CartPage() {
                 <ListGroup.Item>
                   <h3>
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    items) : $
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                    items) :<span className='flex items-center py-1'>
+                       <FaNairaSign />
+                      {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                    </span>
                   </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -115,6 +118,7 @@ export default function CartPage() {
                     <Button
                       type="button"
                       variant="primary"
+                      className='bg-green-500 border-green-500 hover:bg-green-700 hover:border-green-700'
                       onClick={checkoutHandler}
                       disabled={cartItems.length === 0}
                     >

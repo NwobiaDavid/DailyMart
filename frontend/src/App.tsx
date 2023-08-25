@@ -34,27 +34,29 @@ function App() {
   const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
   return (
-    <div className="d-flex flex-column vh-100">
-      <ToastContainer position="bottom-center" limit={1} />
+    <div className="d-flex poppins-font p-0 m-0 flex-column vh-100">
+      <ToastContainer position="bottom-center" limit={3} />
       <header>
         <Navbar
-          className="d-flex flex-column  align-items-stretch  pb-0 mb-3"
+          className="d-flex flex-column  align-items-stretch p-0 m-0"
           bg="dark"
           variant="dark"
           expand="lg"
         >
-          <div className="d-flex  justify-content-between  align-items-center">
+          <div className="d-flex justify-content-between py-2  align-items-center">
             <LinkContainer to="/" className="header-link lg:mr-32 lg:ml-3 px-2 py-1">
               <Navbar.Brand>Daily Mart</Navbar.Brand>
             </LinkContainer>
+
             <SearchBox />
+
             <Navbar.Collapse role="navigation">
-              <Nav className="w-100 mr-3 mb-0 pb-0 mt-0 justify-content-end">
+              <Nav className="w-100 mr-3 mb-0 pb-0 mt-0 justify-end items-center">
                 <Link to="#" className="nav-link header-link" onClick={switchModeHandler}>
                   <i className={mode === 'light' ? 'fa fa-sun' : 'fa fa-moon'}></i> {mode === 'light' ? 'Light' : 'Dark'}
                 </Link>
                 {userInfo ? (
-                  <NavDropdown className="header-link mb-0 pb-0 " title={`Hello, ${userInfo.name}`}>
+                  <NavDropdown className="header-link m-0 p-0 " title={`Hello, ${userInfo.name}`}>
                     <LinkContainer to="/profile">
                       <NavDropdown.Item>User Profile</NavDropdown.Item>
                     </LinkContainer>

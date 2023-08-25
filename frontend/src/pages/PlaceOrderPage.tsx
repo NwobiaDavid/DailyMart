@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext, useEffect } from 'react'
 import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap'
 import { Helmet } from 'react-helmet-async'
@@ -9,7 +10,7 @@ import { useCreateOrderMutation } from '../hooks/orderHooks'
 import { Store } from '../Store'
 import { ApiError } from '../types/ApiError'
 import { getError } from '../utils'
-import React from 'react'
+import { FaNairaSign } from "react-icons/fa6";
 
 export default function PlaceOrderPage() {
   const navigate = useNavigate()
@@ -121,19 +122,19 @@ export default function PlaceOrderPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${cart.itemsPrice.toFixed(2)}</Col>
+                    <Col><span className='flex items-center'>< FaNairaSign />{cart.itemsPrice.toFixed(2)}</span></Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>${cart.shippingPrice.toFixed(2)}</Col>
+                    <Col><span className='flex items-center'>< FaNairaSign />{cart.shippingPrice.toFixed(2)}</span></Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>${cart.taxPrice.toFixed(2)}</Col>
+                    <Col><span className='flex items-center'>< FaNairaSign />{cart.taxPrice.toFixed(2)}</span></Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -142,7 +143,7 @@ export default function PlaceOrderPage() {
                       <strong> Order Total</strong>
                     </Col>
                     <Col>
-                      <strong>${cart.totalPrice.toFixed(2)}</strong>
+                      <strong><span className='flex items-center'>< FaNairaSign />{cart.totalPrice.toFixed(2)}</span></strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -151,6 +152,7 @@ export default function PlaceOrderPage() {
                     <Button
                       type="button"
                       onClick={placeOrderHandler}
+                      className='bg-green-500 duration-200 border-green-500 hover:bg-green-700 hover:border-green-700'
                       disabled={cart.cartItems.length === 0 || isLoading}
                     >
                       Place Order

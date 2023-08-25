@@ -24,7 +24,7 @@ import 'swiper/css/parallax';
 
 export default function Heropage() {
   return (
-    <div className=" ">
+    <div className="poppins-font ">
       <Swiper className=''
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay, Parallax]}

@@ -59,7 +59,17 @@ export default function PaymentMethodPage() {
               />
             </div>
             <div className="mb-3">
-              <Button type="submit">Continue</Button>
+              <Form.Check
+                type="radio"
+                id="Flutterwave"
+                label="Flutterwave"
+                value="Flutterwave"
+                checked={paymentMethodName === 'Flutterwave'}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <Button className="bg-green-500 border-green-500 hover:bg-green-700 hover:border-green-700 " type="submit">Continue</Button>
             </div>
           </Form>
         </div>
