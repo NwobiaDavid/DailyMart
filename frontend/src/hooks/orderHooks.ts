@@ -27,6 +27,14 @@ export const usePayOrderMutation = () =>
       ).data, 
   });
 
+  export const useGetFluttewaveClientIdQuery = () =>
+  useQuery({
+    queryKey: ['flutterwave_pk'],
+    queryFn: async () =>
+      (await apiClient.get<{ clientId: string }>(`/api/keys/flutterwave`)).data,
+  });
+
+
 export const useCreateOrderMutation = () =>
   useMutation({
     mutationFn: async (order: {
