@@ -100,13 +100,12 @@ function App() {
                 <i className="fas fa-bars"></i> All
               </Link>
               {['Todays Deal', 'Packages', 'Recipes', 'Subscriptions'].map((x) => (
-                <Link key={x} className="nav-link header-link p-1 px-3" to={`/search?tag=${x}`}>
+                <Link key={x} className="nav-link header-link p-1 px-3" to={`/search/tag/${x.toLowerCase()}`}>
                   {x}
                 </Link>
               ))}
             </div>
-          </div>
-
+          </div> 
         </Navbar>
       </header>
 

@@ -1,42 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useContext , useEffect} from 'react'
-import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap'
-import { Helmet } from 'react-helmet-async'
-import { Link, useParams } from 'react-router-dom'
-import LoadingBox from '../components/LoadingBox'
-import MessageBox from '../components/MessageBox'
-import { useGetOrderDetailsQuery, useGetPaypalClientIdQuery, usePayOrderMutation } from '../hooks/orderHooks'
-import { Store } from '../Store'
-import { ApiError } from '../types/ApiError'
-import { getError } from '../utils'
-import { toast } from "react-toastify";
-import { PayPalButtons, PayPalButtonsComponentProps, SCRIPT_LOADING_STATE, usePayPalScriptReducer } from '@paypal/react-paypal-js'
-import { FaNairaSign } from "react-icons/fa6";
+import React, { useContext, useEffect } from 'react';
+import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet-async';
+import { Link, useParams } from 'react-router-dom';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import {
+  useGetOrderDetailsQuery,
+  useGetPaypalClientIdQuery,
+  usePayOrderMutation,
+} from '../hooks/orderHooks';
+import { Store } from '../Store';
+import { ApiError } from '../types/ApiError';
+import { getError } from '../utils';
+import { toast } from 'react-toastify';
+import {
+  PayPalButtons,
+  PayPalButtonsComponentProps,
+  SCRIPT_LOADING_STATE,
+  usePayPalScriptReducer,
+} from '@paypal/react-paypal-js';
+import { FaNairaSign } from 'react-icons/fa6';
 
-import { useState } from "react";
-import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import { useState } from 'react';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 
 export default function OrderPage() {
-  const { state } = useContext(Store)
-  const { userInfo } = state
+  const { state } = useContext(Store);
+  const { userInfo } = state;
 
+  const params = useParams();
+  const { id: orderId } = params;
 
-  const params = useParams()
-  const { id: orderId } = params
+  const {
+    data: order,
+    isLoading,
+    error,
+    refetch,
+  } = useGetOrderDetailsQuery(orderId!);
 
-  const { data: order, isLoading, error, refetch } = useGetOrderDetailsQuery(orderId!)
-
-  const {mutateAsync: payOrder, isLoading: LoadingPay } = usePayOrderMutation()
+  const { mutateAsync: payOrder, isLoading: LoadingPay } =
+    usePayOrderMutation();
 
   const testPayHandler = async () => {
-    await payOrder({ orderId: orderId! })
-    refetch()
-    toast.success('Order is paid')
-  }
+    await payOrder({ orderId: orderId! });
+    refetch();
+    toast.success('Order is paid');
+  };
 
-  const[{isPending, isRejected}, paypalDispatch ] = usePayPalScriptReducer()
+  const [{ isPending, isRejected }, paypalDispatch] = usePayPalScriptReducer();
 
-  const {data: paypalConfig } = useGetPaypalClientIdQuery()
+  const { data: paypalConfig } = useGetPaypalClientIdQuery();
 
   useEffect(() => {
     if (paypalConfig && paypalConfig.clientId) {
@@ -45,70 +59,76 @@ export default function OrderPage() {
           type: 'resetOptions',
           value: {
             //changed client-id to clientId
-            'clientId': paypalConfig!.clientId,
+            clientId: paypalConfig!.clientId,
             currency: 'USD',
           },
-        })
+        });
         paypalDispatch({
           type: 'setLoadingStatus',
           value: SCRIPT_LOADING_STATE.PENDING,
-        })
-      }
-      loadPaypalScript()
+        });
+      };
+      loadPaypalScript();
     }
-  }, [paypalConfig])
+  }, [paypalConfig]);
 
-  
-  const config = {
-    public_key: "FLWPUBK_TEST-e7c8f332b9d34b01b958cf4f4f643018-X",
-    tx_ref: Date.now().toString(),
-    amount: total,
-    currency: "NGN",
-    payment_options: "card,mobilemoney,ussd",
-    customer: {
-      email: email,
-      phone_number: phone,
-      name: name,
+  const paypalbuttonTransactionProps: PayPalButtonsComponentProps = {
+    style: { layout: 'vertical' },
+    createOrder(data, action) {
+      return action.order
+        .create({
+          purchase_units: [
+            {
+              amount: {
+                value: order!.totalPrice.toString(),
+              },
+            },
+          ],
+        })
+        .then((orderID: string) => {
+          return orderID;
+        });
     },
-    customizations: {
-      title: "my Payment Title",
-      description: "Payment for items in cart",
-      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+    onApprove(data, actions) {
+      return actions.order!.capture().then(async (details) => {
+        try {
+          await payOrder({ orderId: orderId!, ...details });
+          refetch();
+          toast.success('Order is paid successfully');
+        } catch (err) {
+          toast.error(getError(err as ApiError));
+        }
+      });
+    },
+    onError: (err) => {
+      toast.error(getError(err as ApiError));
     },
   };
 
-  const handleFlutterPayment = useFlutterwave(config);
+  const total = order?.totalPrice;
+  const email = order?.user.email;
+  const name = order?.user.name; // Replace with customer's name
+
+  const config = {
+    public_key: process.env.FLUTTERWAVE_PK || 'FLWPUBK_TEST-e7c8f332b9d34b01b958cf4f4f643018-X',
+    tx_ref: Date.now().toString(),
+    amount: total || 10000,
+    currency: 'NGN',
+    payment_options: 'card,mobilemoney,ussd',
+    customer: {
+      email: email || 'example@example.com', // Replace with a default email or handle this case
+      phone_number: '1234567890', // Replace with a default phone number or handle this case
+      name: name || 'Customer Name', // Replace with a default name or handle this case
+    },
+    customizations: {
+      title: 'Daily Mart Payment',
+      description: 'Payment for items in cart',
+      logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+    },
+  };
   
-  const paypalbuttonTransactionProps: PayPalButtonsComponentProps = {
-    style: {layout: 'vertical'},
-    createOrder(data, action) {
-        return action.order.create({
-            purchase_units: [
-                { 
-                    amount: {
-                        value: order!.totalPrice.toString(),
-                    }
-                }
-            ],
-        }).then((orderID: string)=> {
-            return orderID;
-        })
-    },
-    onApprove(data, actions) {
-        return actions.order!.capture().then(async (details) => {
-            try {
-              await payOrder({ orderId: orderId!, ...details })
-              refetch()
-              toast.success('Order is paid successfully')
-            } catch (err) {
-              toast.error(getError(err as ApiError))
-            }
-          })
-    },
-    onError: (err) => {
-        toast.error(getError(err as ApiError))
-    },
-  }
+
+  const handleFlutterPayment = useFlutterwave(config);
 
   return isLoading ? (
     <LoadingBox />
@@ -172,12 +192,22 @@ export default function OrderPage() {
                           alt={item.name}
                           className="img-fluid rounded thumbnail"
                         ></img>{' '}
-                        <Link to={`/product/${item.slug}`} className='text-xl hover:text-green-700 duration-200'>{item.name}</Link>
+                        <Link
+                          to={`/product/${item.slug}`}
+                          className="text-xl hover:text-green-700 duration-200"
+                        >
+                          {item.name}
+                        </Link>
                       </Col>
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}><span className='flex items-center text-lg'>< FaNairaSign />{item.price}</span></Col>
+                      <Col md={3}>
+                        <span className="flex items-center text-lg">
+                          <FaNairaSign />
+                          {item.price}
+                        </span>
+                      </Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -193,19 +223,34 @@ export default function OrderPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col><span className='flex items-center'>< FaNairaSign />{order.itemsPrice.toFixed(2)}</span></Col>
+                    <Col>
+                      <span className="flex items-center">
+                        <FaNairaSign />
+                        {order.itemsPrice.toFixed(2)}
+                      </span>
+                    </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col><span className='flex items-center'>< FaNairaSign />{order.shippingPrice.toFixed(2)}</span></Col>
+                    <Col>
+                      <span className="flex items-center">
+                        <FaNairaSign />
+                        {order.shippingPrice.toFixed(2)}
+                      </span>
+                    </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col><span className='flex items-center'>< FaNairaSign />{order.taxPrice.toFixed(2)}</span></Col>
+                    <Col>
+                      <span className="flex items-center">
+                        <FaNairaSign />
+                        {order.taxPrice.toFixed(2)}
+                      </span>
+                    </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -214,7 +259,12 @@ export default function OrderPage() {
                       <strong> Order Total</strong>
                     </Col>
                     <Col>
-                      <strong><span className='flex items-center'>< FaNairaSign />{order.totalPrice.toFixed(2)} </span></strong>
+                      <strong>
+                        <span className="flex items-center">
+                          <FaNairaSign />
+                          {order.totalPrice.toFixed(2)}{' '}
+                        </span>
+                      </strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -228,25 +278,43 @@ export default function OrderPage() {
                       </MessageBox>
                     ) : (
                       <div>
-                        <div>
+                        <div className='flex flex-col'>
                           <PayPalButtons
                             {...paypalbuttonTransactionProps}
                           ></PayPalButtons>
-                          <Button className='bg-green-500 duration-200 border-green-500 hover:bg-green-700 hover:border-green-700' onClick={testPayHandler}>Test Pay</Button>
+                          <Button 
+                           className="bg-orange-500 p-3 mb-2 duration-200 border-orange-500 hover:bg-orange-700 hover:border-orange-700"
+                          onClick={() =>
+                              handleFlutterPayment({
+                                callback: (response) => {
+                                  console.log(response);
+                                  closePaymentModal();
+                                },
+                                onClose: () => {},
+                              })
+                            }> pay with Flutterwave</Button>
+                          <Button
+                            className="bg-green-500 duration-200 border-green-500 hover:bg-green-700 hover:border-green-700"
+                            onClick={testPayHandler}
+                          >
+                            Test Pay
+                          </Button>
                         </div>
-                        <div>
-                        <button  onClick={() =>
-            handleFlutterPayment({
-              callback: (response) => {
-                console.log(response);
-                closePaymentModal();
-              },
-              onClose: () => {},
-            })
-          }>pay with flutterwave
-
-                        </button>
-                        </div>
+                        {/* <div>
+                          <button
+                            onClick={() =>
+                              handleFlutterPayment({
+                                callback: (response) => {
+                                  console.log(response);
+                                  closePaymentModal();
+                                },
+                                onClose: () => {},
+                              })
+                            }
+                          >
+                            pay with flutterwave
+                          </button>
+                        </div> */}
                       </div>
                     )}
                     {LoadingPay && <LoadingBox />}
@@ -258,5 +326,5 @@ export default function OrderPage() {
         </Col>
       </Row>
     </div>
-  )
+  );
 }
