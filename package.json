@@ -1,7 +1,7 @@
 {
-  "name": "ts-mern-amazona",
+  "name": "DailyMart",
   "version": "1.0.0",
-  "description": "## Lessons",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix backend\"  \"npm run dev --prefix frontend\" ",
