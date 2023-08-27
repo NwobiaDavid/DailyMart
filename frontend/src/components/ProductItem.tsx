@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { useContext } from "react";
 import { Product } from '../types/Product';
 import { Card, Button } from 'react-bootstrap';
