@@ -56,8 +56,10 @@ export class Order {
 
   @prop({ required: true })
   public paymentMethod!: string
+
   @prop()
   public paymentResult?: PaymentResult
+
   @prop({ required: true, default: 0 })
   public itemsPrice!: number
   @prop({ required: true, default: 0 })
