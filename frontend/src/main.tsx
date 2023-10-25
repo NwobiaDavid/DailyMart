@@ -32,12 +32,14 @@ import TodaysDeals from './pages/TodaysDeals';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      
       <Route index={true} element={<Homepage />} />
       <Route path="product/:slug" element={<ProductPage />} />
       <Route path="/search/tag/todays deal" element={<TodaysDeals />} />
       <Route path="cart" element={<CartPage />} />
       <Route path="signin" element={<SigninPage />} />
       <Route path="signup" element={<SignupPage />} />
+  
       <Route path="" element={<ProtectedRoute />}>
         <Route path="shipping" element={<ShippingAddressPage />} />
         <Route path="payment" element={<PaymentMethodPage />} />
